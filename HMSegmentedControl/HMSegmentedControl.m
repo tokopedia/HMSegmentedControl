@@ -331,6 +331,14 @@
             titleLayer.contentsScale = [[UIScreen mainScreen] scale];
             
             [self.scrollView.layer addSublayer:titleLayer];
+            if ([_redDotCategoryIndex containsObject:[NSNumber numberWithUnsignedInteger:idx]]){
+                CALayer *redDotImageView = [[UIImageView alloc] initWithImage:self.redDotImage].layer;
+                CGRect tempRedDotRect = rectDiv;
+                tempRedDotRect.size.width = 10;
+                tempRedDotRect.size.height = 10;
+                redDotImageView.frame = tempRedDotRect;
+                [self.scrollView.layer addSublayer:redDotImageView];
+            }
             
             // Vertical Divider
             if (self.isVerticalDividerEnabled && idx > 0) {
@@ -340,7 +348,6 @@
                 
                 [self.scrollView.layer addSublayer:verticalDividerLayer];
             }
-            [_titleRects addObject:[NSValue valueWithCGRect:rect]];
             [self addBackgroundAndBorderLayerWithRect:fullRect];
         }];
     } else if (self.type == HMSegmentedControlTypeImages) {
