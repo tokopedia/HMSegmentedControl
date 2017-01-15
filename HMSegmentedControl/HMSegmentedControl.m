@@ -17,7 +17,9 @@
 @property (nonatomic, strong) CALayer *selectionIndicatorStripLayer;
 @property (nonatomic, strong) CALayer *selectionIndicatorBoxLayer;
 @property (nonatomic, strong) CALayer *selectionIndicatorArrowLayer;
+@property (nonatomic, strong) HMScrollView *scrollView;
 @property (nonatomic, readwrite) CGFloat segmentWidth;
+@property (nonatomic, strong) NSMutableArray<NSNumber*> *redDotCategoryIndex;
 @property (nonatomic, readwrite) NSArray *segmentWidthsArray;
 
 @end
@@ -336,12 +338,12 @@
             if ([_redDotCategoryIndex containsObject:[NSNumber numberWithUnsignedInteger:idx]]){
                 CALayer *redDotImageView = [[UIImageView alloc] initWithImage:self.redDotImage].layer;
                 CGRect tempRedDotRect = rectDiv;
-                tempRedDotRect.origin.x += 5;
-                tempRedDotRect.origin.y += 5;
+                tempRedDotRect.origin.x = titleLayer.frame.size.width;
+                tempRedDotRect.origin.y = 0;
                 tempRedDotRect.size.width = 10;
                 tempRedDotRect.size.height = 10;
                 redDotImageView.frame = tempRedDotRect;
-                [self.scrollView.layer addSublayer:redDotImageView];
+                [titleLayer addSublayer:redDotImageView];
             }
             
             // Vertical Divider
@@ -906,6 +908,10 @@
     }
     
     return [resultingAttrs copy];
+}
+
+- (void)showRedDotAtIndex:(NSInteger)index {
+    [self.redDotCategoryIndex addObject:[NSNumber numberWithInteger:index]];
 }
 
 @end
