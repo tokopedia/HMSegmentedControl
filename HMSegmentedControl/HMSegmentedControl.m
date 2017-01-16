@@ -338,10 +338,10 @@
             if ([_redDotCategoryIndex containsObject:[NSNumber numberWithUnsignedInteger:idx]]){
                 CALayer *redDotImageView = [[UIImageView alloc] initWithImage:self.redDotImage].layer;
                 CGRect tempRedDotRect = rectDiv;
-                tempRedDotRect.origin.x = titleLayer.frame.size.width;
-                tempRedDotRect.origin.y = 0;
-                tempRedDotRect.size.width = 10;
-                tempRedDotRect.size.height = 10;
+                tempRedDotRect.origin.x = titleLayer.frame.size.width + 3;
+                tempRedDotRect.origin.y = -3;
+                tempRedDotRect.size.width = 5;
+                tempRedDotRect.size.height = 5;
                 redDotImageView.frame = tempRedDotRect;
                 [titleLayer addSublayer:redDotImageView];
             }
