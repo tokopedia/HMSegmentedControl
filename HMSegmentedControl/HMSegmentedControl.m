@@ -807,8 +807,13 @@
 }
 
 - (void)setSelectedSegmentIndex:(NSUInteger)index animated:(BOOL)animated notify:(BOOL)notify {
-    _selectedSegmentIndex = index;
     [self setNeedsDisplay];
+
+    if (self.segmentWidthStyle == HMSegmentedControlSegmentWidthStyleDynamic && index >= self.segmentWidthsArray.count) {
+        return;
+    }
+    
+    _selectedSegmentIndex = index;
     
     if (index == HMSegmentedControlNoSegment) {
         [self.selectionIndicatorArrowLayer removeFromSuperlayer];
